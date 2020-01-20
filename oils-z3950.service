@@ -8,7 +8,7 @@ BindsTo=opensrf
 User=opensrf
 Group=opensrf
 StandardOutput=journal
-# These values can be overridden in /etc/systemd/system/oils_z3950.service.d/override.conf
+# These values can be overridden in /etc/systemd/system/oils-z3950.service.d/override.conf
 SyslogFacility=local5
 SyslogLevel=info
 SyslogIdentifier=z3950
