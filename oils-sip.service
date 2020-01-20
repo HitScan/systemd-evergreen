@@ -1,0 +1,25 @@
+[Unit]
+Description=SIP Server
+Requires=opensrf
+After=opensrf
+BindsTo=opensrf
+
+[Service]
+User=opensrf
+Group=opensrf
+StandardOutput=journal
+# These values can be overridden in /etc/systemd/system/oils_sip.service.d/override.conf
+WorkingDirectory=/opt/SIPServer
+SyslogFacility=local6
+SyslogLevel=info
+SyslogIdentifier=acs-server
+Environment=SIP_LOG_IDENT=acs-server
+Environment=SIP_CONFIG=/openils/conf/oils_sip.xml
+# Necessary in cases where uid != euid causes perl's taint mode to remove ./ from @INC
+Environment=PERL5LIB=/opt/SIPServer
+Environment=PATH=/openils/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=perl SIPServer.pm $SIP_CONFIG
+
+[Install]
+WantedBy=multi-user.target
+

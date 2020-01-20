@@ -1,0 +1,24 @@
+[Unit]
+Description=Open Service Request Framework
+After=ejabberd memcached
+Before=apache2 websocketd nginx clark-kent oils-sip oils-z3950
+Requires=ejabberd memcached
+BindsTo=ejabberd
+Wants=clark-kent oils-sip oils-z3950 apache2 websocketd nginx
+
+[Service]
+User=opensrf
+Group=opensrf
+Type=oneshot
+RemainAfterExit=yes
+# to use the fqdn in the config file, put Environment=LOCALHOST= in /etc/systemd/system/opensrf.service.d/override.conf
+Environment=LOCALHOST="-l"
+Environment="PATH=/openils/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ExecStart=/openils/bin/osrf_control --start-all $LOCALHOST
+ExecStop=/openils/bin/osrf_control --stop-all $LOCALHOST
+
+[Install]
+Alias=evergreen.service
+WantedBy=multi-user.target
+RequiredBy=apache2 websocketd nginx clark-kent oils-sip oils-z3950
+

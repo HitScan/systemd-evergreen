@@ -1,0 +1,21 @@
+[Unit]
+Description=Evergreen Reporter
+Requires=opensrf
+After=opensrf
+BindsTo=opensrf
+
+[Service]
+User=opensrf
+Group=opensrf
+Type=forking
+# These can be overridden in /etc/systemd/system/clark-kent.service.d/override.conf
+Environment=OSRF_CORE=/openils/conf/opensrf_core.xml
+Environment=LOCKF=/tmp/reporter-LOCK
+Environment=SLEEPINT=10
+Environment=PATH=/openils/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/openils/bin/clark-kent.pl --daemon --bootstrap $OSRF_CORE --lockfile $LOCKF --sleep $SLEEPINT
+ExecStopPost=/rm /tmp/reporter-LOCK
+
+[Install]
+WantedBy=multi-user.target
+

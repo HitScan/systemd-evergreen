@@ -1,0 +1,23 @@
+[Unit]
+Description=Websocketd OpenSRF Translator
+BindsTo=opensrf
+After=opensrf
+
+[Service]
+Type=simple
+User=opensrf
+Group=opensrf
+StandardOutput=journal
+SyslogFacility=local6
+SyslogLevel=info
+SyslogIdentifier=websocketd
+# These can be overridden in /etc/systemd/system/websocketd.service.d/override.conf
+Environment=ADDRESS=localhost
+Environment=PORT=7682
+Environment=MAXFORKS=250
+Environment="PATH=/openils/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ExecStart=/usr/local/bin/websocketd --loglevel info --maxforks $MAXFORKS --address $ADDRESS --port $PORT /openils/bin/osrf-websocket-stdio
+
+[Install]
+WantedBy=multi-user.target
+
