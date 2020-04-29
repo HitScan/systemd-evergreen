@@ -1,8 +1,8 @@
 [Unit]
 Description=SIP Server
-Requires=opensrf
-After=opensrf
-BindsTo=opensrf
+Requires=opensrf.service
+After=opensrf.service
+BindsTo=opensrf.service
 
 [Service]
 User=opensrf

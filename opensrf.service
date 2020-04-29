@@ -1,10 +1,10 @@
 [Unit]
 Description=Open Service Request Framework
-After=ejabberd memcached
-Before=apache2 websocketd nginx clark-kent oils-sip oils-z3950
-Requires=ejabberd memcached
-BindsTo=ejabberd
-Wants=clark-kent oils-sip oils-z3950 apache2 websocketd nginx
+After=ejabberd.service memcached.service
+Before=apache2.service websocketd.service nginx.service clark-kent.service oils-sip.service oils-z3950.service
+Requires=ejabberd.service memcached.service
+BindsTo=ejabberd.service
+Wants=clark-kent.service oils-sip.service oils-z3950.service apache2.service websocketd.service nginx.service
 
 [Service]
 User=opensrf
@@ -20,5 +20,5 @@ ExecStop=/openils/bin/osrf_control --stop-all $LOCALHOST
 [Install]
 Alias=evergreen.service
 WantedBy=multi-user.target
-RequiredBy=apache2 websocketd nginx clark-kent oils-sip oils-z3950
+RequiredBy=apache2.service websocketd.service nginx.service clark-kent.service oils-sip.service oils-z3950.service
 

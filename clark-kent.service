@@ -1,8 +1,8 @@
 [Unit]
 Description=Evergreen Reporter
-Requires=opensrf
-After=opensrf
-BindsTo=opensrf
+Requires=opensrf.service
+After=opensrf.service
+BindsTo=opensrf.service
 
 [Service]
 User=opensrf
@@ -14,7 +14,7 @@ Environment=LOCKF=/tmp/reporter-LOCK
 Environment=SLEEPINT=10
 Environment=PATH=/openils/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ExecStart=/openils/bin/clark-kent.pl --daemon --bootstrap $OSRF_CORE --lockfile $LOCKF --sleep $SLEEPINT
-ExecStopPost=/rm /tmp/reporter-LOCK
+ExecStopPost=/bin/rm /tmp/reporter-LOCK
 
 [Install]
 WantedBy=multi-user.target
