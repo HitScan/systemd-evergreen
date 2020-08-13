@@ -15,7 +15,7 @@ SyslogIdentifier=z3950
 Environment=Z3950_CONFIG=/openils/conf/oils_z3950.xml
 Environment=YAZ_CONFIG=/openils/conf/oils_yaz.xml
 Environment=PATH=/openils/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ExecStart=simple2zoom -c $Z3950_CONFIG -- -f $YAZ_CONFIG 
+ExecStart=/usr/bin/simple2zoom -c $Z3950_CONFIG -- -f $YAZ_CONFIG
 
 [Install]
 WantedBy=multi-user.target

@@ -18,7 +18,7 @@ Environment=SIP_CONFIG=/openils/conf/oils_sip.xml
 # Necessary in cases where uid != euid causes perl's taint mode to remove ./ from @INC
 Environment=PERL5LIB=/opt/SIPServer
 Environment=PATH=/openils/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ExecStart=perl SIPServer.pm $SIP_CONFIG
+ExecStart=/usr/bin/perl SIPServer.pm $SIP_CONFIG
 
 [Install]
 WantedBy=multi-user.target
