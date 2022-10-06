@@ -1,7 +1,6 @@
 [Unit]
 Description=Websocketd OpenSRF Translator
-BindsTo=opensrf.service
-After=opensrf.service
+After=opensrf.service nginx.service
 
 [Service]
 Type=simple
